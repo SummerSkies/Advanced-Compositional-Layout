@@ -29,6 +29,8 @@ class StoreItemContainerViewController: UIViewController, UISearchResultsUpdatin
     var tableViewImageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
     var collectionViewImageLoadTasks: [IndexPath: Task<Void, Never>] = [:]
     
+    weak var collectionViewController: StoreItemCollectionViewController?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,10 +45,31 @@ class StoreItemContainerViewController: UIViewController, UISearchResultsUpdatin
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let tableViewController = segue.destination as? StoreItemListTableViewController {
             configureTableViewDataSource(tableViewController.tableView)
+            if let collectionViewController = segue.destination as?
+               StoreItemCollectionViewController {
+                collectionViewController.configureCollectionViewLayout(for:
+                   selectedSearchScope)
+                configureCollectionViewDataSource(collectionViewController.collectionView)
+            }
         }
         
         if let collectionViewController = segue.destination as? StoreItemCollectionViewController {
             configureCollectionViewDataSource(collectionViewController.collectionView)
+        }
+        
+        func handleFetchedItems(_ items: [StoreItem]) async {
+            let currentSnapshotItems = itemsSnapshot.itemIdentifiers
+            let updatedSnapshot = createSectionedSnapshot(from:
+               currentSnapshotItems + items)
+            itemsSnapshot = updatedSnapshot
+        
+            collectionViewController?.configureCollectionViewLayout(for:
+               selectedSearchScope)
+        
+            await tableViewDataSource.apply(itemsSnapshot,
+               animatingDifferences: true)
+            await collectionViewDataSource.apply(itemsSnapshot,
+               animatingDifferences: true)
         }
     }
     
@@ -76,6 +99,18 @@ class StoreItemContainerViewController: UIViewController, UISearchResultsUpdatin
             
             return cell
         })
+        
+        collectionViewDataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
+            
+            let headerView =
+            collectionView.dequeueReusableSupplementaryView(ofKind: "Header", withReuseIdentifier: StoreItemCollectionViewSectionHeader.reuseIdentifier, for: indexPath) as! StoreItemCollectionViewSectionHeader
+            
+            let title =
+            self.itemsSnapshot.sectionIdentifiers[indexPath.section]
+            headerView.setTitle(title)
+            
+            return headerView
+        }
     }
     
     func updateSearchResults(for searchController: UISearchController) {

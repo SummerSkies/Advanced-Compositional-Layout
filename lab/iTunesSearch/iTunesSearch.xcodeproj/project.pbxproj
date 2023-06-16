@@ -22,6 +22,7 @@
 		18A6053723CFABDC002037CA /* StoreItemController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A6053623CFABDC002037CA /* StoreItemController.swift */; };
 		86C0AAB52A3CA25E009618B5 /* SearchScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0AAB42A3CA25E009618B5 /* SearchScope.swift */; };
 		86C0AAB72A3CBB81009618B5 /* StoreItemTableViewDiffableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0AAB62A3CBB81009618B5 /* StoreItemTableViewDiffableDataSource.swift */; };
+		86C0AAB92A3CBCF1009618B5 /* StoreItemCollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86C0AAB82A3CBCF1009618B5 /* StoreItemCollectionViewSectionHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		18A6053623CFABDC002037CA /* StoreItemController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreItemController.swift; sourceTree = "<group>"; };
 		86C0AAB42A3CA25E009618B5 /* SearchScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchScope.swift; sourceTree = SOURCE_ROOT; };
 		86C0AAB62A3CBB81009618B5 /* StoreItemTableViewDiffableDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreItemTableViewDiffableDataSource.swift; sourceTree = "<group>"; };
+		86C0AAB82A3CBCF1009618B5 /* StoreItemCollectionViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreItemCollectionViewSectionHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 				1812E9A023F35901009BBFA7 /* StoreItemContainerViewController.swift */,
 				86C0AAB42A3CA25E009618B5 /* SearchScope.swift */,
 				86C0AAB62A3CBB81009618B5 /* StoreItemTableViewDiffableDataSource.swift */,
+				86C0AAB82A3CBCF1009618B5 /* StoreItemCollectionViewSectionHeader.swift */,
 				18A6052523CF9803002037CA /* Assets.xcassets */,
 				18A6052723CF9803002037CA /* LaunchScreen.storyboard */,
 				18A6052223CF9802002037CA /* Main.storyboard */,
@@ -171,6 +174,7 @@
 				18A6053523CFABBB002037CA /* StoreItem.swift in Sources */,
 				1821478F23F602F3005B6EFE /* ItemCollectionViewCell.swift in Sources */,
 				1821479123F60428005B6EFE /* ItemDisplaying.swift in Sources */,
+				86C0AAB92A3CBCF1009618B5 /* StoreItemCollectionViewSectionHeader.swift in Sources */,
 				18A6053723CFABDC002037CA /* StoreItemController.swift in Sources */,
 				18A6053123CF9829002037CA /* StoreItemListTableViewController.swift in Sources */,
 				86C0AAB72A3CBB81009618B5 /* StoreItemTableViewDiffableDataSource.swift in Sources */,
