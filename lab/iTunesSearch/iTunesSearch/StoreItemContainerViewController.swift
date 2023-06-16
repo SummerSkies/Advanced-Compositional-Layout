@@ -45,31 +45,13 @@ class StoreItemContainerViewController: UIViewController, UISearchResultsUpdatin
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let tableViewController = segue.destination as? StoreItemListTableViewController {
             configureTableViewDataSource(tableViewController.tableView)
-            if let collectionViewController = segue.destination as?
-               StoreItemCollectionViewController {
-                collectionViewController.configureCollectionViewLayout(for:
-                   selectedSearchScope)
-                configureCollectionViewDataSource(collectionViewController.collectionView)
-            }
         }
         
         if let collectionViewController = segue.destination as? StoreItemCollectionViewController {
             configureCollectionViewDataSource(collectionViewController.collectionView)
-        }
-        
-        func handleFetchedItems(_ items: [StoreItem]) async {
-            let currentSnapshotItems = itemsSnapshot.itemIdentifiers
-            let updatedSnapshot = createSectionedSnapshot(from:
-               currentSnapshotItems + items)
-            itemsSnapshot = updatedSnapshot
-        
-            collectionViewController?.configureCollectionViewLayout(for:
-               selectedSearchScope)
-        
-            await tableViewDataSource.apply(itemsSnapshot,
-               animatingDifferences: true)
-            await collectionViewDataSource.apply(itemsSnapshot,
-               animatingDifferences: true)
+            collectionViewController.configureCollectionViewLayout(for: selectedSearchScope)
+            
+            self.collectionViewController = collectionViewController
         }
     }
     
@@ -168,10 +150,10 @@ class StoreItemContainerViewController: UIViewController, UISearchResultsUpdatin
         let updatedSnapshot = createSectionedSnapshot(from: currentSnapshotItems + items)
         itemsSnapshot = updatedSnapshot
         
-        await tableViewDataSource.apply(itemsSnapshot,
-                                        animatingDifferences: true)
-        await collectionViewDataSource.apply(itemsSnapshot,
-                                             animatingDifferences: true)
+        collectionViewController?.configureCollectionViewLayout(for: selectedSearchScope)
+        
+        await tableViewDataSource.apply(itemsSnapshot, animatingDifferences: true)
+        await collectionViewDataSource.apply(itemsSnapshot, animatingDifferences: true)
     }
     
     func fetchAndHandleItemsForSearchScopes(_ searchScopes: [SearchScope], withSearchTerm searchTerm: String) async throws {

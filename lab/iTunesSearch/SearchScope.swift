@@ -32,8 +32,7 @@ enum SearchScope: CaseIterable {
 }
 
 extension SearchScope {
-    var orthogonalScrollingBehavior:
-       UICollectionLayoutSectionOrthogonalScrollingBehavior {
+    var orthogonalScrollingBehavior: UICollectionLayoutSectionOrthogonalScrollingBehavior {
         switch self {
         case .all:
             return .continuousGroupLeadingBoundary

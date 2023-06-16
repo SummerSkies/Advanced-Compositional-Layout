@@ -38,17 +38,12 @@ class StoreItemCollectionViewSectionHeader:
         backgroundColor = .systemGray5
 
         addSubview(titleLabel)
-        titleLabel.translatesAutoresizingMaskIntoConstraints =
-           false
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: topAnchor,
-               constant: 2),
-            titleLabel.trailingAnchor.constraint(equalTo:
-               trailingAnchor, constant: -15),
-            titleLabel.bottomAnchor.constraint(equalTo:
-               bottomAnchor, constant: -2),
-            titleLabel.leadingAnchor.constraint(equalTo:
-               leadingAnchor, constant: 15),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 2),
+            titleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -15),
+            titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 15),
         ])
     }
 }
