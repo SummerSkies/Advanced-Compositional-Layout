@@ -10,7 +10,7 @@ class StoreItemContainerViewController: UIViewController, UISearchResultsUpdatin
     let searchController = UISearchController()
     let storeItemController = StoreItemController()
     
-    var tableViewDataSource: UITableViewDiffableDataSource<String, StoreItem>!
+    var tableViewDataSource: StoreItemTableViewDiffableDataSource!
     var collectionViewDataSource: UICollectionViewDiffableDataSource<String, StoreItem>!
     
     var itemsSnapshot = NSDiffableDataSourceSnapshot<String,
@@ -51,7 +51,7 @@ class StoreItemContainerViewController: UIViewController, UISearchResultsUpdatin
     }
     
     func configureTableViewDataSource(_ tableView: UITableView) {
-        tableViewDataSource = UITableViewDiffableDataSource<String, StoreItem>(tableView: tableView, cellProvider: { (tableView, indexPath, item) -> UITableViewCell? in
+        tableViewDataSource = StoreItemTableViewDiffableDataSource(tableView: tableView, cellProvider: { (tableView, indexPath, item) -> UITableViewCell? in
             let cell = tableView.dequeueReusableCell(withIdentifier: "Item", for: indexPath) as! ItemTableViewCell
             
             self.tableViewImageLoadTasks[indexPath]?.cancel()
