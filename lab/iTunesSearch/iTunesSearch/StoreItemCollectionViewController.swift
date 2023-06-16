@@ -18,5 +18,4 @@ class StoreItemCollectionViewController: UICollectionViewController {
         
         collectionView.collectionViewLayout = UICollectionViewCompositionalLayout(section: section)
     }
-    
 }

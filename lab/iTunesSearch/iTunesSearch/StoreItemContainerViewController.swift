@@ -130,10 +130,7 @@ class StoreItemContainerViewController: UIViewController, UISearchResultsUpdatin
     func handleFetchedItems(_ items: [StoreItem]) async {
         
         let currentSnapshotItems = itemsSnapshot.itemIdentifiers
-        var updatedSnapshot = NSDiffableDataSourceSnapshot<String,
-           StoreItem>()
-        updatedSnapshot.appendSections(["Results"])
-        updatedSnapshot.appendItems(currentSnapshotItems + items)
+        let updatedSnapshot = createSectionedSnapshot(from: currentSnapshotItems + items)
         itemsSnapshot = updatedSnapshot
         
         await tableViewDataSource.apply(itemsSnapshot,
@@ -166,5 +163,31 @@ class StoreItemContainerViewController: UIViewController, UISearchResultsUpdatin
                 }
             }
         }
+    }
+    
+    func createSectionedSnapshot(from items: [StoreItem]) ->
+       NSDiffableDataSourceSnapshot<String, StoreItem> {
+    
+        let movies = items.filter { $0.kind == "feature-movie" }
+        let music = items.filter { $0.kind == "song" || $0.kind == "album" }
+        let apps = items.filter { $0.kind == "software" }
+        let books = items.filter { $0.kind == "ebook" }
+    
+        let grouped: [(SearchScope, [StoreItem])] = [
+            (.movies, movies),
+            (.music, music),
+            (.apps, apps),
+            (.books, books)
+        ]
+    
+        var snapshot = NSDiffableDataSourceSnapshot<String, StoreItem>()
+        grouped.forEach { (scope, items) in
+            if items.count > 0 {
+                snapshot.appendSections([scope.title])
+                snapshot.appendItems(items, toSection: scope.title)
+            }
+        }
+    
+        return snapshot
     }
 }
